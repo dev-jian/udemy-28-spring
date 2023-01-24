@@ -1,0 +1,19 @@
+- tightly coupled 란?
+Coupling: 결속, 결속력에 따라 무언가를 바꿀 때 얼마나 많은 작업이 필요한지가 달라진다.
+ex) 엔진은 차에 강하게 결속되어있음. 그래서 바꾸기 힘들지만 바퀴는 약하게 결속되어있기 때문에 어떤 바퀴든 바꿀 수 있음.
+
+이런 식으로 요구사항은 항상 바뀌기 때문에 수정이 편리하도록 작업을 해야함. 이를 위해 loose coupling이 필요.
+
+즉 loose coupling의 목적은 소스코드의 수정 최소화이다.
+
+- interface를 이용해 loose coupling을 할 수 있다.
+interface는 특정 클래스들이 수행할 수 있는 공통 행동(메서드) 들을 대표하는 것이다.
+
+강의의 소스에서 Game Runner가 특정 Game에 결속되지 않도록 한 것이 그 예이다.
+
+- Spring Framework를 이용해 좀 더 loose coupling 할 수 있다.
+기존 JVM가 관리하던 객체들을 Spring Framework가 하도록 함.
+
+- @Configuration을 붙인 클래스에 Spring Bean들을 정의할 수 있다. Bean을 반환하는 메서드를 생성하고 @Bean을 붙이면 된다.
+
+- @Bean을 붙인 메서드의 이름이 곧 Bean의 이름이 된다.
