@@ -17,6 +17,16 @@ public class App02HelloWorldSpring {
 		
 		// 2: Configure the things that we want Spring to manage - @Configuration
 		System.out.println(ctx.getBean("name"));
+		
+		System.out.println(ctx.getBean("person"));
+		
+		System.out.println(ctx.getBean("address2"));
+		
+		System.out.println(ctx.getBean(Address.class));
+		
+		System.out.println(ctx.getBean("person2MethodCall"));
+		
+		System.out.println(ctx.getBean("person3Parameters"));
 	}
 
 }
