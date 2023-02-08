@@ -1,4 +1,4 @@
-package me.devjian.learnspringframework;
+package me.devjian.learnspringframework.helloworld;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

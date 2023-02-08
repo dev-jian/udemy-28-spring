@@ -1,10 +1,14 @@
 package me.devjian.learnspringframework.game;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
 public class GameRunner {
 	
-	GamingConsole game;
+	private GamingConsole game;
 
-	public GameRunner(GamingConsole game) {
+	public GameRunner(@Qualifier(value = "pacmanGame") GamingConsole game) {
 		this.game = game;
 	}
 	

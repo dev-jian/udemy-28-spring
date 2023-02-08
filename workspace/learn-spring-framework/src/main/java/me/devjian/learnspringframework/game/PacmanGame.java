@@ -1,5 +1,8 @@
 package me.devjian.learnspringframework.game;
 
+import org.springframework.stereotype.Component;
+
+@Component(value = "pacmanGame")
 public class PacmanGame implements GamingConsole {
 
 	@Override

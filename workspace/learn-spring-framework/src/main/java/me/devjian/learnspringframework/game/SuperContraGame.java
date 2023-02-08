@@ -1,5 +1,8 @@
 package me.devjian.learnspringframework.game;
 
+import org.springframework.stereotype.Component;
+
+@Component(value = "superContraGame")
 public class SuperContraGame implements GamingConsole {
 
 	public void up() {

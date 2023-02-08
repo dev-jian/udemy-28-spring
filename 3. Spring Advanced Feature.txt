@@ -1,0 +1,30 @@
+[Lazy Loading]
+
+- Spring Bean 기본 설정은 Eager이다.
+=> 해당 Bean을 호출하는 부분이 없더라도 스프링 실행 시 초기화한다는 뜻이다.
+
+- @Lazy를 이용해 해당 Bean의 초기화 시점을 늦출 수 있다. 로딩 시점은 해당 Bean을 사용하는 때이다.
+
+- 다만 Eager 초기화를 추천하는데 그 이유는 애플리케이션 실행시점에 즉시 에러를 찾을 수 있기 때문이다.
+
+- Lazy 초기화가 설정된 Bean에는 proxy 객체가 주입된다.
+
+- 3-1. Lazy vs Eager 이미지 참조.
+
+==================================================
+[Bean Scope]
+
+- Singleton : Spring 컨테이너 당 하나만 생성되는 객체
+- Prototype : Spring 컨테이너에서 요청될 때마다 하나씩 생성되는 객체
+
+- Web Application에만 적용 가능한 Scope들도 존재한다.
+1. Request : one object instance per single http request.
+2. Session : One Object instance per user Http Session.
+3. Application : one object per Web Application runtime
+4. WebSocket : one object per WebSocket.
+
+- Java Singleton(GOF: Gang of Four Design pattern) vs Spring singleton
+=> Java Singleton은 JVM 당 하나의 Object를 의미.
+=> Spring Singleton은 Spring Container 당 하나의 Object를 의미
+=> 따라서 JVM에 Spring Container를 하나만 띄우면 같은 의미이나. 그 이상 부터는 같다고 보기 어려움.
+

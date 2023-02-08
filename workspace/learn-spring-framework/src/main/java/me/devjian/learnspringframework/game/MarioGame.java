@@ -1,5 +1,8 @@
 package me.devjian.learnspringframework.game;
 
+import org.springframework.stereotype.Component;
+
+@Component(value = "marioGame")
 public class MarioGame implements GamingConsole {
 
 	public void up() {
