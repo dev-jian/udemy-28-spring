@@ -28,3 +28,11 @@
 => Spring Singleton은 Spring Container 당 하나의 Object를 의미
 => 따라서 JVM에 Spring Container를 하나만 띄우면 같은 의미이나. 그 이상 부터는 같다고 보기 어려움.
 
+- 3-2. Prototype vs Singleton 참조
+
+- @PostConstruct를 이용해 Bean이 생성된 후 실행될 메서드를 지정할 수 있다.
+
+- @PreDestroy를 이용해 Bean이 파괴되기 전 실행될 메서드를 지정할 수 있다.
+
+================================================================
+
