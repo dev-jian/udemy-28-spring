@@ -1,0 +1,21 @@
+[J2EE, Java EE, Jakarta EE]
+
+- 맨 처음엔 JDK 만으로 Enterprise 수준의 개발이 가능했다.
+
+- J2EE, Java EE, Jakarta EE가 그 API들이다.
+
+==========================
+
+[CDI]
+- Java EE에서 소개한 CDI Specification이며, 상세이기 때문에 interface이다.
+
+- Spring 또한 이 CDI를 구현했으며, 현재 Jakarta Context and Dependency Injection이라고 한다.
+
+- 해당 상세에서 중요하게 사용되는 API Annotation들이 있다.
+1. Inject (=== Autowired)
+2. Named (=== Named)
+3. Qualifier
+4. Scope
+5. Singleton
+
+- 따라서 Jakarta Inject 의존성 추가후 스프링의 빈 주입 관련 애노테이션 대신 사용하여도 된다.

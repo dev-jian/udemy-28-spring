@@ -1,4 +1,4 @@
-package me.devjian.learnspringframework.examples.c1;
+package me.devjian.learnspringframework.examples.h1;
 
 import java.util.Arrays;
 
@@ -6,18 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Configuration
 @ComponentScan
-public class RealWorldSpringContextLauncherApplication {
+public class CdiLauncherApplication {
 	
 	public static void main(String[] args) {
 		
 		try (var ctx = 
-				new AnnotationConfigApplicationContext(RealWorldSpringContextLauncherApplication.class)) {
-			
-			System.out.println(ctx.getBean(BusinessCalculationDataService.class).findMax());
+				new ClassPathXmlApplicationContext("contextConfiguration.xml")) {
+		
+				Arrays.stream(ctx.getBeanDefinitionNames()).forEach(System.out::println);
 		}
 	}
 }

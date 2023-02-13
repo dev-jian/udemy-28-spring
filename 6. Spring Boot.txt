@@ -1,0 +1,12 @@
+[Before Spring Boot]
+
+- Spring Boot 이전에는 여러 의존성을 전부 추가해야했다. MVC, Databind, Log4j..
+
+- web.xml에 dispatcherServlet 설정을 했어야 했다.
+
+- ComponentScan, View Resolver, Data Source 등 스프링 관련 설정을 해야 했다.
+
+- NFR(Non-Functional Requirements - ex. Logging, Error Handling, Monitoring..) 들을 구현해야 했다.
+
+- Spring boot를 이용하면 이러한 설정들을 자동으로 해준다.
+
