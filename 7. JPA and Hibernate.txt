@@ -38,3 +38,21 @@
 - entityManager를 이용해 작업할 때 @Transactional 이 꼭 필요하다.
 
 - spring.jpa.show-sql=true 설정을 이용해 jpa가 생성하는 쿼리를 확인할 수 있다.
+
+- spring data jpa를 이용하면 보일러 플레이트 코드를 많이 줄일 수 있다. ex. save(), findById(), deleteById() 등..
+
+- spring data jpa를 사용하려면 repository 인터페이스에 JpaRepository<T, ID> 를 상속하고 @Repository를 붙인다.
+=> T는 영속성 관리할 엔티티의 타입이며, ID는 해당 엔티티의 ID 필드 타입이다.
+=> 또한 entityManager를 따로 주입받아 사용할 필요도 없다.
+
+- 또한 특정 필드의 값에 따라 조회하고 싶을 경우 해당 interface에 네이밍 컨벤션을 이용해 메서드를 상세하면 자동으로 구현해준다.
+ex. findByAuthor(String author) : 입력된 author의 값에 따라 조회
+
+===========================================================
+[Hibernate vs JPA]
+
+- JPA는 상세를 서술한 것이다. its just an api.
+=> 엔티티를 어떻게 정의할 것인지? (@Entity)
+=> 각 속성을 어떻게 연결할 것인지? (@Id and @Column)
+
+- Hibernate는 이 상세를 구현한 것 중 하나이다.

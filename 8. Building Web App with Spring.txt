@@ -1,0 +1,13 @@
+- html 코드를 하나씩 써서 보내는 것은 미친짓이기때문에 view를 이용한다.
+
+- JSP를 이용할 때 스프링 부트가 지정한 특정 폴더 안에 JSP 파일을 생성하면 뷰 리졸버를 이용해 해당 뷰를 반환할 수 있다.
+=> src/main/resources/META-INF/resources/WEB-INF/jsp/~~~.jsp 
+
+- @ResponseBody를 붙일 경우 리턴한 것을 그대로 반환하기 때문에 뷰를 반환하기 위해서는 제거해야한다.
+
+- spring properties에 
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+를 이용해 설정할 수 있다. 뷰리졸버 설정이다.
+
+- org.apache.tomcat.embed 그룹의 tomcat-embed-japser 의존성이 필요하다.
