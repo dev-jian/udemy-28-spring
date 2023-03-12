@@ -1,20 +1,21 @@
 package me.devjian.springboot.myfirstwebapp.controller;
 
-import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import jakarta.validation.Valid;
+
+@RestController
 public class TestController {
-
+	
+	private Logger logger = LoggerFactory.getLogger(TestController.class);
+	
     @GetMapping("say-hello")
-    @ResponseBody
-    public String test() {
+    public String test(@Valid TestRequest request) {
+    	
+    	
         return "Hello ~";
-    }
-
-    @GetMapping("say-hello-jsp")
-    public String getView() {
-        return "sayHello";
     }
 }

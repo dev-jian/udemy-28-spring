@@ -11,3 +11,72 @@ spring.mvc.view.suffix=.jsp
 를 이용해 설정할 수 있다. 뷰리졸버 설정이다.
 
 - org.apache.tomcat.embed 그룹의 tomcat-embed-japser 의존성이 필요하다.
+
+- url 끝에 ?를 붙이고 key1=value1&key2=value2.. 식으로 매개변수를 전달할 수 있다.
+
+- spring에서는 이를 @RequestParam 을 이용해 변수에 바인딩할 수 있다.
+
+- Controller에서 JSP로 데이터를 전달하기 위해서 ModelMap을 이용할 수 있다.
+
+- JSP에서 Expression Language를 이용해 Controller에서 전달한 변수를 이용할 수 있다. ex. ${name}
+
+- System.out.println을 이용해 로깅하는 것보다 Logger를 이용하는 것이 추천된다.
+
+- 예전에는 모든 코드들이 JSP에 담겨있었다. (Model 1) 그러다 보니 너무 혼잡해져 유지보수가 힘들어졌다.
+
+- 그래서 Model, View, Controller를 나눈 것이 Model 2이다.
+
+- 그러나 Controller를 Servlet 단위로 나누니 공통 로직들을 처리하기가 힘들었다. 그래서 FrontController 패턴을 도입하게 된다.
+
+- Spring MVC에서는 이 FrontController를 Dispatcher Servlet으로 구현했다.
+
+- View Resolver의 logic으로 인해 설정에서 지정한 prefix와 suffix 그리고 controller에서 반환하는 jsp 명을 조합해 view를 렌더한다.
+
+- Single Responsibility 지키자.
+
+- 요청에 사용된 값은 기본적으로 해당 요청에서만 유효하다.
+
+- 그러나 이러한 값들을 다른 요청에도 쓰도록 하기 위한 방법들이 있는데 그 중 하나는 Session을 이용하는 것이다.
+
+- 이렇게 Request Scope는 해당 요청에 대한 응답이 이뤄진 후 요청 시 사용했던 request attributes들이 메모리에서 사라지게 된다. 
+
+- Session scope일 경우 각 요청 상세들이 여러 request들에서 사용가능하도록 저장된다. 따라서 추가적인 메모리가 필요하다는 것을 인지해야 한다.
+
+- @SessionAttribute를 이용해 설정한 모델의 값을 session에 저장하도록 하며, ModelAttribute에도 해당 세션 값을 바인딩 되도록 처리할 수 있다.
+
+- 템플릿 엔진을 이용해 동적으로 무언가를 만들고 싶을 때 JSP에서는 JSTL을 이용할 수 있다. 이는 EL로는 할 수 없는 부분들을 할수 있게 해줌.
+
+- 여태까지 의존성의 groupId를 기재하지 않았던 이유는 spring boot starter parent 때문이었는데, bootstrap 같은 web jar들은 해당 pom에 속하지 않아있기 때문에 group id도 기재해야 한다.
+
+- 기본적으로 stylesheet는 head 태그에, js는 body의 맨 마지막에 삽입한다.
+
+- @RequestMapping을 메서드 설정 없이 사용하면 모든 HTTP method들의 요청을 받는다.
+
+- jsp view 리턴 시 redirect 하도록 할 수 있다. 리턴에 redirect: 를 붙이면 된다.
+
+- validation을 위해 spring boot starter validation을 이용할 것이다.
+
+- 또한 Command Bean이라는 개념을 도입. jsp와 controller 2 way binding을 할 것이다.
+
+- bean에 validation을 적용할 것이다.
+
+- validation에서 발생한 error를 jsp에 표기할 것이다.
+
+- 요청으로 전달 받은 여러 개의 값을 하나의 bean으로 받는 것을 command bean이라 한다.
+
+- Spring JSP Form Tag를 이용해 modelAttribute와 form을 연결할 수 있다.
+
+- modelAttribute에 연결할 model 명을, path에 연결할 필드를 입력하면 된다.
+
+- Server side validation을 할 때 Spring boot starter validation 추가해야한다.
+
+- 2 way binding이란 bean에서 form으로 form에서 bean으로 데이터를 결속시키는 것을 의미하고,
+Spring에서는 jsp 이를 form tag를 통해 쉽게 구현할 수 있도록 해준다.
+
+- bean의 각 필드에 @Size, @NotNull 등의 validation annotation을 이용해 bean validation을 할 수 있으며, 실제 데이터를 바인딩하는 bean에 @Valid를 붙여야한다.
+
+- BindingResult를 이용해 binding 시 발생한 에러에 대한 처리를 하려 할 때 해당 매개변수를 선언할 순서에 주의해야 한다. 반드시 BindingResult 매개변수 앞에 binding이 이루어지는 매개변수가 위치해야한다.
+
+- jsp에서 spring form tag 이용 시 html class 속성들은 cssClass를 이용해야한다.
+
+- Spring + JSP에서 html의 property value에 el을 사용할 수 있다.
