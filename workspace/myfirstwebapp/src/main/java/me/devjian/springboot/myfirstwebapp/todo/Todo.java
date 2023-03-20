@@ -4,13 +4,16 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Todo {
 	
+	@Id
+	@GeneratedValue
 	private int id;
 	
 	private String username;
@@ -18,9 +21,14 @@ public class Todo {
 	@Size(min=10, message="Enter at least 10 characters.")
 	private String description;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate targetDate;
 	
 	private boolean done;
+	
+	public Todo() {
+		
+	}
 	
 	public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
 		super();

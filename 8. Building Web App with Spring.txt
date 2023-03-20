@@ -80,3 +80,43 @@ Spring에서는 jsp 이를 form tag를 통해 쉽게 구현할 수 있도록 해
 - jsp에서 spring form tag 이용 시 html class 속성들은 cssClass를 이용해야한다.
 
 - Spring + JSP에서 html의 property value에 el을 사용할 수 있다.
+
+- @DateTimeFormat 또는 application properties에서 spring.mvc.format.date=yyyy-MM-dd 설정을 통해 LocalDate 타입의 표기 형식을 지정할 수 있다.
+
+- jspf 파일로 jsp fragment를 관리할 수 있고, 사용할 때 include directive를 이용해야 한다.
+
+- SpringSecurityConfig을 만들어 권한과 인증에 대한 설정을 할 수 있다.
+
+- UserDetailsManager를 bean으로 등록하면 되는데 이 때 해당 클래스의 인자에 UserDetails를 구현한 객체를 넘겨줘야 한다. 그 객체는 로그인 할 User에 대한 정보가 저장된 객체이다.
+
+- PasswordEncoder 인터페이스를 구현한 특정 클래스를 bean으로 등록할 경우 스프링 시큐리티에서는 입력받은 비밀번호를 해당 클래스의 암호화 방식을 이용해 암호화한다.
+
+- Userbuilder에서 passwordEncoder를 메서드를 이용해 저장할 비밀번호를 어떻게 암호화할 지 설정할 수 있다.
+
+- SecurityContextHolder에서 현재 쓰레드에 존재하는 시큐리티 컨텍스트를 가져올 수 있다.
+SecurityContextHolder.getContext(), 그리고 그 컨텍스트의 Authentication을 설정하거나 조회할 수 있다.
+
+- h2 database를 jar파일에 포함시키지 않으려면 gav 입력 시 <scope>runtime</scope> 입력하면 된다.
+
+- 별도의 스프링 시큐리티 설정을 하지 않으면 모든 URL이 보호되며 로그인 창이 보이게 된다.
+- 이런 설정에서 h2 console에 접근하려면 CSRF를 꺼야하고, Frame 태그를 이용할 수 있게 설정해야한다. h2 console이 frame 태그를 사용하기 때문이다.
+http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+		http.formLogin(Customizer.withDefaults());
+		http.csrf().disable();
+		http.headers().frameOptions().disable();
+		
+- @Entity를 POJO에 붙여 해당 클래스를 테이블과 맵핑할 것이라고 알릴 수 있다.
+
+- 원래 하이버네이트는 테이블을 자동으로 만들어주지 않았다. spring boot가 autoconfiguration을 통해 이를 가능케한다.
+
+- 모든 Entity는 @Id가 있어야 한다.
+
+- spring.jpa.defer-datasource-initialization=true 설정을 이용해 Entity가 지정된 후 data.sql을 실행하도록 할 수 있다.
+
+- SQL 문에 쌍따옴표를 쓸 경우 컬럼으로 인식한다. 따라서 홑따옴표 이용하자 값을 쓸때는.
+
+- Repository allows entity to perform actions.
+
+- JpaRepository를 상속받아 derived query methods를 이용할 수 있다.
+
+- @Entity에 기본 생성자 꼭 넣어주자.
