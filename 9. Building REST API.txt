@@ -1,0 +1,5 @@
+- 모든 요청은 Front Controller인 dispatcherServlet을 거친다.
+
+- bean이 json으로 바뀌는 과정은 @ResponseBody와 JacksonHttpMessageConverter를 통해 이루어진다. 이 또한 spring boot의 자동설정에 포함된다.
+
+- ErrorMvcAutoconfiguration 또한 자동설정으로 에러 발생 시 화이트라벨 페이지를 만들어 보여준다.

@@ -18,15 +18,12 @@ import jakarta.validation.Valid;
 @Controller
 public class TodoControllerJpa {
 
-	private final Logger logger = LoggerFactory.getLogger(TodoController.class);
-	
-	private final TodoService todoService;
+	private final Logger log = LoggerFactory.getLogger(TodoController.class);
 	
 	private final TodoRepository todoRepository;
 	
-	public TodoControllerJpa(TodoService todoService, TodoRepository todoRepository) {
+	public TodoControllerJpa(TodoRepository todoRepository) {
 		super();
-		this.todoService = todoService;
 		this.todoRepository = todoRepository;
 	}
 	
@@ -37,21 +34,20 @@ public class TodoControllerJpa {
 		}
 		String username = getLoggedInUsername();
 		todo.setUsername(username);
-		todoService.updateTodo(todo);
-		
+		todoRepository.save(todo);
 		return "redirect:list-todos";
 	}
 	
 	@GetMapping("update-todo")
 	public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
-		Todo theTodo = todoService.findById(id);
+		Todo theTodo = todoRepository.findById(id).get();
 		model.put("todo", theTodo);
 		return "todo";
 	}
 	
 	@GetMapping("delete-todo")
 	public String deleteTodo(@RequestParam int id) {
-		todoService.deleteById(id);
+		todoRepository.deleteById(id);
 		return "redirect:list-todos";
 	}
 	
@@ -60,15 +56,18 @@ public class TodoControllerJpa {
 		if (result.hasErrors()) {
 			return "todo";
 		}
+		
 		String username = getLoggedInUsername();
-		todoService.addNewTodo(username, todo.getDescription(), todo.getTargetDate(), false);
+		todo.setUsername(username);
+		Todo savedTodo = todoRepository.save(todo);
+		log.debug("저장된 Todo: {}", savedTodo);
 		return "redirect:list-todos";
 	}
 	
 	@GetMapping("add-todo")
 	public String showNewTodoPage(ModelMap model) {
 		String username = getLoggedInUsername();
-		Todo todo = new Todo(0, username, "Default Value", LocalDate.now().plusYears(1), false);
+		Todo todo = new Todo(0, username, "Default Value", LocalDate.now(), false);
 		model.put("todo", todo);
 		return "todo";
 	}

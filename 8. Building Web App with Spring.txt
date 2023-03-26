@@ -120,3 +120,13 @@ http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
 - JpaRepository를 상속받아 derived query methods를 이용할 수 있다.
 
 - @Entity에 기본 생성자 꼭 넣어주자.
+
+- spring data jpa와 h2 의존성을 설정했을 때 spring boot에서는 jpa와 spring data jpa 프레임워크에 관한 설정을 해주고, h2를 실행시켜준다. 또한 앱과 h2의 커넥션을 설정해준다. 또한 sql 관련 script를 실행시켜준다. (ex. data.sql)
+
+- spring.jpa.show-sql=true로 sql문이 보이도록 할 수 있다.
+
+- mysql connector java를 추가한 후 docker로 띄운 mysql dbms를 datasource로 설정할 수 있다.
+- 이 때 접속정보 설정 후 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect 설정해주어 하이버네이트가 mysql8 문법을 사용할 수 있도록 설정해주자.
+
+- 또한 h2를 이용할 때는 자동설정 되었던 ddl (엔티티와 연결된 테이블 생성문)설정을 필요에 따라 따로 해주어야한다.
+spring.jpa.hibernate.ddl-auto=update
