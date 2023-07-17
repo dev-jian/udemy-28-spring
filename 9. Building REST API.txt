@@ -3,3 +3,57 @@
 - bean이 json으로 바뀌는 과정은 @ResponseBody와 JacksonHttpMessageConverter를 통해 이루어진다. 이 또한 spring boot의 자동설정에 포함된다.
 
 - ErrorMvcAutoconfiguration 또한 자동설정으로 에러 발생 시 화이트라벨 페이지를 만들어 보여준다.
+
+- request URL에 {변수명} 을 이용해서 경로 변수를 이용할 수 있다. path-variable. 이 경로 변수를 컨트롤러 메서드의 파라미터로 전달받아 로직에 사용가능하다.
+
+- 201 응답 시 SevletUriComponentBuilder를 이용해 만들어진 자원을 조회하는 URI 객체를 build하여 Location header에 추가할 수 있다.
+
+- devtools 덕에 local에서 에러 발생 시 화이트라벨 페이지에 구체적인 stack trace가 된다.
+
+- ResponseEntity 응답 시 발생하는 에러메시지 객체를 커스터마이징 할 수 있다. ErrorDetails 라는 이름으로 보통 짓는다.
+
+- 기본 에러메시지 구성은 ResponseEntityExceptionHandler에 의해 구성된다.
+
+- @Valid 애노테이션을 이용하면 해당 객체에 바인딩이 발생할 때 객체 내부에 설정한 유효성 검사를 자동으로 수행하도록 표시할 수 있다.
+
+- handleMethodArgumentNotValid 메서드를 오버라이드하여 유효성 검사 에러 핸들링을 커스터마이징할 수 있다.
+
+- exception 객체의 getFieldError 메서드를 이용해 하나의 필드에러만 가져올 수 있다.
+
+- 옛날에 rest api의 문서의 사양이 필요해서 나온게 Swagger Specification이며 이 rest api 문서 사양을 눈으로 볼 수 있는 도구도 나왔다.
+
+- open api specification은 이 Swagger specification을 기반으로 만들어진 사양이다. 따라서 현재는 이 open api spec.과 swagger tools를 이용하는 것이 표준이다.
+
+- content negotiation을 통해 다른 형식의 결과 값 또는 언어로 응답을 지원할 수 있다.
+
+- i18n을 지원하기 위해 전통적으로 Accept-Language header를 이용한다.
+
+- messages.properties에 default 언어의 key value를 입력 후 스프링에서 MessageSource 빈을 주입받아 사용 가능하다. 그리고 LocalContextHolder에서 Locale 정보 가져올 수 있다.
+
+- 유저가 많이 생겼을 때 응답에 변화가 생기는 패치가 있을 경우 API versioning을 통해 간접적으로 업데이트 해야한다.
+
+- @GetMapping의 인자로 params, headers 등을 전달하여 특정 매개변수나 헤더 값일 때 호출되도록 할 수 있다.
+
+- Accept Header를 이용한 versioning도 가능하다 e.g) vender.app-v1+json
+
+- 방법에 따라 장단점이 있는데
+1. url 오염정도
+2. header의 잘못된 사용
+3. header 구분 및 동일 URL 사용으로 인해 캐시 불가
+4. 브라우저에서 호출할 수 있는가 ? 
+5. API Doc을 쉽게 작성할 수 있는가 ?
+
+- Serialization이란 객체를 데이터의 나열로 변환하는 것을 의미한다. e.g) Object to JSON.
+
+- Jackson은 유명한 Object 2 JSON framework이다.
+- @JSONProperty를 이용해 필드명을 커스터마이징 할 수 있다.
+
+- 특정 필드만 반환하도록 할 수 있는데 이를 filtering이라고 한다.
+- 크게 두가지 타입이 있으며 static filtering, dynamic filter이 있다.
+- static은 해당 빈을 이용하는 API는 무조건 필터링하며, dynamic은 api에 따라 필터하는 설정을 할 수 있다.
+- @JsonIgnore, @JsonIgnoreProperties => static 
+- FilterProvider로 필터 정의 후 MappingJacksonValue로 리턴하는 방법 = > dynamic
+
+- spring.h2.console.enabled=true h2 console 사용가능하도록 설정.
+
+- @ManyToOne의 속성으로 fetch를 이용하면 해당 관계를 어느 시점에 불러올지 설정할 수 있다.

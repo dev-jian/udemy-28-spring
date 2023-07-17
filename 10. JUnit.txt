@@ -1,0 +1,61 @@
+- 1000줄이 넘는 거대한 코드를 테스트 하는 방법이 뭐가 있을까 ?
+1. 서버에 배포 후 테스트 한다 
+-- 이를 통합 테스트 또는 시스템 테스트라고 함.
+2. 특정 코드 단위를 독립적으로 테스트한다.
+-- 유닛 테스트라고도 함.
+
+- 유닛 테스트를 해놓으면 CI 환경일 때 버그를 빨리 찾을 수 있고 그로 인해 비용이 줄어든다.
+
+- JUnit과 Mokito는 대표적인 자바의 유닛테스트 및 모킹 프레임워크이다.
+
+- test 폴더에 src와 같은 패키지를 만들고 테스트를 생성한다.
+
+- assertEquals 메서드를 이용해 예상되는 결과와 실제 결과가 같은지 체크할 수 있다.
+
+- 유닛 테스트를 잘 작성할 경우 유지보수가 쉬워진다 허나 테스트를 잘 작성하는 것이 쉽지는 않다.
+
+- 예를 들어 여러 의존성을 가진 클래스를 생각해보자.
+- 이를 위해 stub (dummy객체)를 만들어 사용할 수 있다.
+- 허나 어디까지나 필요에 따라 내가 직접만들어야하기때문에 양이 많아질수록 힘들어진다.
+
+- mockito를 이용하면 위의 문제를 해결가능하다
+
+- mock()으로 모조품을 만들 클래스를 지정 후 when().thenResult()를 이용해 해당 메서드 호출 시 결과 값을 지정한다.
+
+- @Mock과 @InjectMocks를 이용해 더 편리하게 mocking할 수 있다. 마치 의존성 주입처럼 말이다.
+- 위의 애노테이션을 이용하기 위해선 @ExtendWith(MockitoExtension.class) 설정을 해주어야 한다.
+
+- @BeforeAll @AfterAll은 DB Connection 등에 사용하면 좋다.
+
+- assertArrayEquals를 이용해 배열비교를 할 수 있다.
+
+- assertIterableEquals를 이용해 Iterable을 구현한 객체들을 비교할 수있다.
+
+- assertLinesMatch를 이용해 문자열 리스트 비교가능
+
+- assertThrows를 이용해 예외 발생 비교 테스트 가능 
+
+- assertTimeoutPreemptively를 이용해 타임아웃 관련 테스트를 진행할 수 잇다.
+
+- @TestMethodOrder(MethodOrderer.~.class)를 이용해 테스트 순서를 지정할 수 있다.
+Random 시나리오에서 실행 시 통과한다면 베스트이다.
+
+- @Order(숫자)를 통해 직접 지정할 수 있다.
+
+- @Disabled와 @EnableOnOs, @EnabledOnJre, @EnabledForJreRange, @EnabledIfEnvironmentVariable를 이용해 모든 또는 특정 상황에서 테스트가 동작하지 않도록 할 수 있다.
+
+- @ParameterizedTest를 이용해 하나의 테스트를 여러 입력 값으로 돌려볼 수 있다.
+
+- Spring boot unit testing이 필요한 이유는 application context에 대한 접근 및 rest api 등의 모조객체 제공 등과 같은 이유이다.
+
+- @SpringBootTest를 이용해 테스트 환경에서 application context를 로드하고 bean 주입을 할 수 있다.
+
+- 만약 테스트 클래스의 패키지가 소스 클래스와 다르다면 @SpringBootTest에 명시적으로 설정해주어야한다. 
+
+- doThrow 로 해당 메서드 호출 시 지정한 예외를 던지도록 설정할 수 있다.
+
+- consecutive call을 이용해 두번 째 호출 시 정상적ㅇ로 호출되도록 설정할 수 있다.
+
+- verify() 를 통해 어떤 메서드가 몇번 호출되었는지 체크할 수 있다.
+
+- Non Public 한 필드 또는 메서드에 접근해야할 때 reflectionUtils를 사용하면 된다.
